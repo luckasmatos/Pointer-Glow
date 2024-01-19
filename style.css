@@ -9,7 +9,7 @@
   --border: hsl(280 10% 50% / 1);
   --card: hsl(237 36% 10%);
   --color: hsl(240 18% 80%);
-  --border-width: 2px;
+  --border-width: 1px;
   --border-radius: 12px;
   --gradient: conic-gradient(
     from 180deg at 50% 70%,
@@ -94,7 +94,7 @@ article:is(:hover, :focus-visible) {
   background-attachment: fixed;
   position: absolute;
   inset: -5px;
-  border: 10px solid transparent;
+  border: var(--distance) solid transparent;
   border-radius: var(--border-radius);
   mask: linear-gradient(#0000, #0000),
     conic-gradient(
@@ -112,7 +112,7 @@ article:is(:hover, :focus-visible) {
 article::before {
   position: absolute;
   inset: 0;
-  border: var(--border-width) solid transparent;
+  border: CALC(var(--border-width) + (var(--distance)/10)) solid transparent;
   content: "";
   border-radius: var(--border-radius);
   pointer-events: none;
@@ -148,7 +148,7 @@ article::after {
   transition: opacity 1s;
   --alpha: 0;
   inset: 0;
-  border: var(--border-width) solid transparent;
+  border: CALC(var(--border-width) + (var(--distance)/10)) solid transparent;
   mask: linear-gradient(#0000, #0000),
     conic-gradient(
       from

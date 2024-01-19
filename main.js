@@ -8,9 +8,11 @@ const CONFIG = {
   gap: 32,
   vertical: false,
   opacity: 0,
+  distance: 10,
 };
 
 const PROXIMITY = 10;
+const ACTIVE_DISTANCE = true;
 
 const UPDATE = (event) => {
   // obtendo o ângulo com base no ponto central do card e na posição do ponteiro do mouse
@@ -38,6 +40,9 @@ const UPDATE = (event) => {
       Math.PI;
     ANGLE = ANGLE < 0 ? ANGLE + 360 : ANGLE;
     CARD.style.setProperty("--start", ANGLE + 90);
+
+    let DISTANCE = ACTIVE_DISTANCE ? ((Math.sqrt((event?.x - CARD_CENTER[0])*(event?.x - CARD_CENTER[0]) + (event?.y - CARD_CENTER[1])*(event?.y - CARD_CENTER[1])))/150)*10 : CONFIG.distance;
+    CARD.style.setProperty("--distance", `${DISTANCE > CONFIG.distance ? CONFIG.distance : DISTANCE}px`);
   }
 };
 
@@ -51,6 +56,7 @@ const RESTYLE = () => {
     "--direction",
     CONFIG.vertical ? "column" : "row"
   );
+  CONTAINER.style.setProperty("--distance", CONFIG.distance);
 };
 
 RESTYLE();
